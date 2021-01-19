@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    style="@style/imcActivity"
+    tools:context=".ImcActivity"
+    >
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        android:text="@string/txtIMC" />
+
+    <EditText
+        android:id="@+id/input_alturaImc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Altura(cm)"
+        android:maxLength="3"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="20dp"/>
+    <EditText
+        android:id="@+id/input_pesoImc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Peso (kg)"
+        android:maxLength="3"
+        android:ems="10"
+        android:inputType="numberDecimal" />
+
+    <Button
+        style="@style/btnForm"
+        android:id="@+id/btn_calc"
+        android:text="Calcular"
+        />
+
+</LinearLayout>
+</ScrollView>
