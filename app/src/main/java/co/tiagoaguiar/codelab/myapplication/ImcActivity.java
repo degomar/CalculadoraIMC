@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class ImcActivity extends AppCompatActivity {
                 String sWheigh = inputWheight.getText().toString();
                 int height = Integer.parseInt(sHeight);
                 int wheight = Integer.parseInt(sWheigh);
-                double result = calculoIMC(height, wheight);
+                final double result = calculoIMC(height, wheight);
                 //Log.d("resultado","resultado " + result);
                 int imcresult = responseIMC(result);
 
@@ -55,7 +56,25 @@ public class ImcActivity extends AppCompatActivity {
 
                            }
                        })
-                       .create();
+                       .setNegativeButton(R.string.save, new DialogInterface.OnClickListener() {
+                           @Override
+
+                           public void onClick(DialogInterface dialogInterface, int i) {
+                               new Thread(()-> {
+                                   long calcId =  SQLHelper.getINSTANCE(ImcActivity.this).addItem("Imc", result);
+
+                                   runOnUiThread(()->{
+                                           if (calcId > 0){
+                                               Toast.makeText(ImcActivity.this,
+                                                       R.string.saved, Toast.LENGTH_LONG).show(); }
+                                           Intent intent = new Intent(ImcActivity.this, ListCalcActivity.class);
+                                           intent.putExtra("type","imc");
+                                           startActivity(intent);
+                                   });
+
+                               }).start();
+                           }
+                       }).create();
                dialog.show();
 
                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
